@@ -1,0 +1,61 @@
+name: Deployment (test and production)
+
+on:
+  push:
+    branches: [master, dev]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # JOB 1: Deploy to GitHub Pages (DEV branch)
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install & Build
+        run: |
+          npm install
+          npx openapi-typescript-codegen \
+          --input ./spec.yaml \
+          --output ./src/client \
+          –useUnionTypes
+          npm run build
+          cp dist/index.html dist/404.html
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GH Pages
+        uses: actions/deploy-pages@v4
+
+  # JOB 2: Deploy to Hostinger (MASTER branch)
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+      - name: Sync to Hostinger (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./public_html/
