@@ -32,6 +32,9 @@ interface StatusChipProps {
 }
 
 export const StatusChip: React.FC<StatusChipProps> = ({ status, type }) => {
+    if (!status) {
+        return <Chip label="N/A" size="small" variant="outlined" />;
+    }
     const color = type === 'PROJECT'
         ? getProjectStatusColor(status as ProjectStatus)
         : getTaskStatusColor(status as TaskStatus);
