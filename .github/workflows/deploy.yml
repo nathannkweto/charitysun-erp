@@ -23,7 +23,7 @@ jobs:
           npx openapi-typescript-codegen \
           --input ./spec.yaml \
           --output ./src/client \
-          –useUnionTypes
+          --useUnionTypes
           npm run build
           cp dist/index.html dist/404.html
         env:
