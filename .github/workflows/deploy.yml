@@ -14,7 +14,7 @@ jobs:
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment: testing
     steps:
       - uses: actions/checkout@v4
       - name: Install & Build
