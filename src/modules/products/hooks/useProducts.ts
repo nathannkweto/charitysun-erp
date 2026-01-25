@@ -1,33 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { ProductControllerService, Product } from '@/client/services/ProductControllerService';
 
-// This is a placeholder for the actual API service call
-// In a real scenario, this would import from @/client/services
+/**
+ * Hook for managing product data.
+ * Follows the pattern: Page -> Hook -> Service
+ */
 const useProducts = () => {
-    const [products, setProducts] = useState<any[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback(async () => {
         setLoading(true);
+        setError(null);
         try {
-            // Mocking API call
-            const mockData = [
-                { id: '1', name: 'Product A', category: 'Category 1', price: 100 },
-                { id: '2', name: 'Product B', category: 'Category 2', price: 200 },
-            ];
-            setProducts(mockData);
+            const data = await ProductControllerService.listProducts();
+            setProducts(data);
         } catch (err) {
-            setError('Failed to fetch products');
+            setError(err instanceof Error ? err.message : 'Failed to fetch products');
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [fetchProducts]);
 
-    return { products, loading, error, fetchProducts };
+    return {
+        products,
+        loading,
+        error,
+        refetch: fetchProducts
+    };
 };
 
 export default useProducts;
+
