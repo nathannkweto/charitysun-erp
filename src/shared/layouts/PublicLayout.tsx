@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
 
 interface PublicLayoutProps {
     children: React.ReactNode;
@@ -91,6 +92,7 @@ const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
                                     {link.label}
                                 </Link>
                             ))}
+                            <ThemeToggle />
                             <Button
                                 variant="outlined"
                                 color="inherit"

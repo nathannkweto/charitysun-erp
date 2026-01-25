@@ -22,6 +22,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 import { logout } from '@/store/authSlice';
+import { ThemeToggle } from '@/shared/components/ThemeToggle';
 
 const drawerWidth = 240;
 
@@ -60,6 +61,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                     </Typography>
 
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <ThemeToggle />
                         {isAuthenticated ? (
                             <>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
