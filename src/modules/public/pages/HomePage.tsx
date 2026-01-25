@@ -3,19 +3,59 @@ import { Box, Typography, Container, Grid, Stack } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import engineDetail from '@/assets/engine-detail.jpg';
 import automotiveParts from '@/assets/automotive-parts.jpg';
+import charityVideo from '@/assets/charity.mp4';
 
 const HomePage: React.FC = () => {
     return (
         <Box>
-            {/* Hero Section - Simple & Clean */}
+            {/* Hero Section - Video Background */}
             <Box
                 sx={{
+                    position: 'relative',
                     pt: { xs: 15, md: 20 },
                     pb: { xs: 8, md: 15 },
-                    bgcolor: '#F9FAFB',
+                    overflow: 'hidden',
+                    minHeight: { xs: '60vh', md: '70vh' },
+                    display: 'flex',
+                    alignItems: 'center',
+                    bgcolor: '#000',
                 }}
             >
-                <Container maxWidth="lg">
+                {/* Video Background */}
+                <Box
+                    component="video"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    src={charityVideo}
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: 0,
+                        opacity: 0.85,
+                    }}
+                />
+
+                {/* Light gradient overlay only for text area */}
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.3) 100%)',
+                        zIndex: 1,
+                    }}
+                />
+
+                {/* Content */}
+                <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
                     <Typography
                         variant="h1"
                         sx={{
@@ -23,15 +63,22 @@ const HomePage: React.FC = () => {
                             fontSize: { xs: '3rem', md: '5rem' },
                             mb: 4,
                             letterSpacing: '-0.02em',
-                            color: '#0F172A',
+                            color: '#FFFFFF',
+                            textShadow: '2px 2px 8px rgba(0,0,0,0.5)',
                         }}
                     >
                         Charitysun Engineering
                     </Typography>
                     <Typography
                         variant="h5"
-                        color="text.secondary"
-                        sx={{ maxWidth: 700, lineHeight: 1.6, fontSize: { xs: '1.2rem', md: '1.4rem' } }}
+                        sx={{
+                            maxWidth: 700,
+                            lineHeight: 1.6,
+                            fontSize: { xs: '1.2rem', md: '1.4rem' },
+                            color: '#FFFFFF',
+                            opacity: 0.95,
+                            textShadow: '1px 1px 4px rgba(0,0,0,0.5)',
+                        }}
                     >
                         Leading the way in precision engineering and innovative solutions for the modern
                         industrial landscape.
