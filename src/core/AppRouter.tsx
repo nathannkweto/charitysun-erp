@@ -17,6 +17,7 @@ import ChartOfAccounts from "../modules/accounting/pages/ChartOfAccounts.tsx";
 import GeneralLedger from "../modules/accounting/pages/GeneralLedger.tsx";
 import LandingPage from "../modules/public/pages/LandingPage.tsx";
 import PublicLayout from "../shared/layouts/PublicLayout.tsx";
+import ServicesPage from "../modules/public/pages/ServicesPage.tsx";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const { isAuthenticated, isLoading } = useAuth();
@@ -57,11 +58,9 @@ export const AppRouter = () => {
                         <Route path="jobs" element={<JobPositionsPage />} />
                     </Route>
 
-                    {/* Accounting Module */}
+                    {/* Services Page */}
                     <Route path="services">
-                        <Route index element={<AccountingDashboard />} />
-                        <Route path="chart-of-accounts" element={<ChartOfAccounts />} />
-                        <Route path="ledger" element={<GeneralLedger />} />
+                        <Route index element={<ServicesPage />} />
                     </Route>
 
                     {/* Projects Module */}
