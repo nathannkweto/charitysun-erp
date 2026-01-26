@@ -44,15 +44,15 @@ export const Sidebar = ({
     const location = useLocation();
 
     const menuItems = [
-        { text: 'Dashboard', icon: <Dashboard />, path: '/' },
-        { text: 'Human Resources', icon: <People />, path: '/hr' },
-        { text: 'Projects', icon: <Assignment />, path: '/projects' },
-        { text: 'Products', icon: <Inventory />, path: '/products' },
-        { text: 'Accounting', icon: <AccountBalance />, path: '/accounting' },
+        { text: 'Dashboard', icon: <Dashboard />, path: '/erp' },
+        { text: 'Human Resources', icon: <People />, path: '/erp/hr' },
+        { text: 'Projects', icon: <Assignment />, path: '/erp/projects' },
+        { text: 'Products', icon: <Inventory />, path: '/erp/products' },
+        { text: 'Accounting', icon: <AccountBalance />, path: '/erp/accounting' },
     ];
 
     const secondaryItems = [
-        { text: 'Settings', icon: <Settings />, path: '/settings' },
+        { text: 'Settings', icon: <Settings />, path: '/erp/settings' },
     ];
 
     const handleNavigation = (path: string) => {
