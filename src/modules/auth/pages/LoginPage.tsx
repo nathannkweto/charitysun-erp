@@ -1,116 +1,118 @@
-import React, { useState } from 'react';
-import {
-    Box,
-    Button,
-    Container,
-    TextField,
-    Typography,
-    Paper,
-    InputAdornment,
-    Alert
-} from '@mui/material';
-import {
-    LockOutlined,
-    EmailOutlined,
-    Visibility,
-    VisibilityOff
-} from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../core/auth/useAuth';
+import React from 'react';
+import { Box, Grid, Typography, alpha } from '@mui/material';
+import LoginForm from '../components/LoginForm';
+import authBg from '../../../assets/auth-bg.jpg';
 
-export const LoginPage = () => {
-    const { login } = useAuth();
-    const navigate = useNavigate();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setError(null);
-        setLoading(true);
-
-        try {
-            await login({ email, password });
-
-            navigate('/');
-
-        } catch (err: any) {
-            const msg = err.body?.message || "Invalid credentials. Please try again.";
-            setError(msg);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+const LoginPage: React.FC = () => {
     return (
-        <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default' }}>
-            <Container maxWidth="xs">
-                <Paper elevation={3} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', borderRadius: 2 }}>
-                    <Box sx={{ width: 50, height: 50, borderRadius: '50%', bgcolor: 'primary.main', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-                        <LockOutlined sx={{ color: 'white' }} />
-                    </Box>
-                    <Typography component="h1" variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
-                        Sign in to CharitySun
+        <Grid container sx={{ height: '100vh', overflow: 'hidden' }}>
+            {/* Left Side: Visual/Branding */}
+            <Grid
+                size={{ xs: 0, sm: 4, md: 7 }}
+                sx={{
+                    position: 'relative',
+                    backgroundImage: `url(${authBg})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    display: { xs: 'none', sm: 'flex' },
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    p: 6,
+                }}
+            >
+                {/* Overlay for better text readability */}
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: `linear-gradient(to top, ${alpha('#0F172A', 0.9)} 0%, ${alpha('#0F172A', 0.2)} 100%)`,
+                        zIndex: 1
+                    }}
+                />
+
+                <Box sx={{ position: 'relative', zIndex: 2, maxWidth: 600 }}>
+                    <Typography
+                        variant="h1"
+                        color="white"
+                        sx={{
+                            fontSize: { md: '3.5rem', lg: '4.5rem' },
+                            fontWeight: 800,
+                            lineHeight: 1.1,
+                            mb: 2
+                        }}
+                    >
+                        Precision Engineering <br />
+                        <span style={{ color: '#3B82F6' }}>Redefined.</span>
                     </Typography>
+                    <Typography
+                        variant="h6"
+                        color="grey.400"
+                        sx={{ fontWeight: 400, maxWidth: 500 }}
+                    >
+                        Experience the next generation of Automobile & Mechanical ERP systems.
+                        Streamline your workflow with Charitysun Engineering.
+                    </Typography>
+                </Box>
+            </Grid>
 
-                    {error && <Alert severity="error" sx={{ width: '100%', mb: 2 }}>{error}</Alert>}
-
-                    <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start"><EmailOutlined color="action" /></InputAdornment>
-                                ),
-                            }}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type={showPassword ? 'text' : 'password'}
-                            id="password"
-                            autoComplete="current-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <Box component="span" sx={{ cursor: 'pointer' }} onClick={() => setShowPassword(!showPassword)}>
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </Box>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            size="large"
-                            disabled={loading}
-                            sx={{ mt: 3, mb: 2, py: 1.5, fontWeight: 'bold' }}
-                        >
-                            {loading ? 'Signing in...' : 'Sign In'}
-                        </Button>
+            {/* Right Side: Authentication form */}
+            <Grid
+                size={{ xs: 12, sm: 8, md: 5 }}
+                component={Box}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: 'background.paper',
+                    p: 4,
+                    height: '100%'
+                }}
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '100%',
+                        maxWidth: 450
+                    }}
+                >
+                    {/* Logo */}
+                    <Box
+                        sx={{
+                            width: 64,
+                            height: 64,
+                            bgcolor: 'primary.main',
+                            borderRadius: 2,
+                            mb: 4,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: 'white',
+                            fontWeight: 800,
+                            fontSize: '1.5rem',
+                            boxShadow: '0 10px 15px -3px rgba(15, 23, 42, 0.4)'
+                        }}
+                    >
+                        CE
                     </Box>
-                </Paper>
-            </Container>
-        </Box>
+
+                    <LoginForm />
+                </Box>
+
+                <Box sx={{ mt: 'auto', pt: 4 }}>
+                    <Typography variant="caption" color="text.secondary">
+                        &copy; 2026 Charitysun Engineering. All rights reserved.
+                    </Typography>
+                </Box>
+            </Grid>
+        </Grid>
     );
 };
+
+export default LoginPage;

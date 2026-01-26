@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './auth/useAuth';
 import { MainLayout } from '../shared/layouts/MainLayout';
-import { LoginPage } from '../modules/auth/pages/LoginPage';
+import LoginPage from '../modules/auth/pages/LoginPage';
 import { Box, CircularProgress } from '@mui/material';
 import type { JSX } from "react";
 
@@ -46,19 +46,12 @@ export const AppRouter = () => {
                 {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
 
-                {/* Protected Routes (Wrapped in PublicLayout) */}
+                {/* Public Routes (Wrapped in PublicLayout) */}
                 <Route
                     path="/"
                     element={<PublicLayout />}
                 >
                     <Route index element={<LandingPage />} />
-
-                    {/* Home Page */}
-                    <Route path="home">
-                        <Route index element={<HrDashboardPage />} />
-                        <Route path="employees" element={<EmployeeDirectory />} />
-                        <Route path="jobs" element={<JobPositionsPage />} />
-                    </Route>
 
                     {/* Services Page */}
                     <Route path="services">
