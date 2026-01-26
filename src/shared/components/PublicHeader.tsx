@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {type ReactElement} from 'react';
 import { AppBar, Toolbar, Typography, Stack, Link, Button, IconButton, useScrollTrigger } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,7 +7,7 @@ const ElevationScroll = (props: { children: React.ReactElement }) => {
     const { children } = props;
     const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 50 });
 
-    return React.cloneElement(children, {
+    return React.cloneElement(children as ReactElement<any>, {
         elevation: trigger ? 4 : 0,
         sx: {
             bgcolor: trigger ? '#FFFFFF' : 'transparent',
