@@ -15,6 +15,8 @@ import { ProjectDetails } from "../modules/pm/pages/ProjectDetails.tsx";
 import { AccountingDashboard } from "../modules/accounting/pages/AccountingDashboard.tsx";
 import ChartOfAccounts from "../modules/accounting/pages/ChartOfAccounts.tsx";
 import GeneralLedger from "../modules/accounting/pages/GeneralLedger.tsx";
+import LandingPage from "../modules/public/pages/LandingPage.tsx";
+import PublicLayout from "../shared/layouts/PublicLayout.tsx";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const { isAuthenticated, isLoading } = useAuth();
@@ -28,7 +30,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return children;
@@ -41,9 +43,46 @@ export const AppRouter = () => {
                 {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
 
-                {/* Protected Routes (Wrapped in MainLayout) */}
+                {/* Protected Routes (Wrapped in PublicLayout) */}
                 <Route
                     path="/"
+                    element={<PublicLayout />}
+                >
+                    <Route index element={<LandingPage />} />
+
+                    {/* Home Page */}
+                    <Route path="home">
+                        <Route index element={<HrDashboardPage />} />
+                        <Route path="employees" element={<EmployeeDirectory />} />
+                        <Route path="jobs" element={<JobPositionsPage />} />
+                    </Route>
+
+                    {/* Accounting Module */}
+                    <Route path="services">
+                        <Route index element={<AccountingDashboard />} />
+                        <Route path="chart-of-accounts" element={<ChartOfAccounts />} />
+                        <Route path="ledger" element={<GeneralLedger />} />
+                    </Route>
+
+                    {/* Projects Module */}
+                    <Route path="about">
+                        <Route index element={<ProjectDashboard />} />
+                        <Route path=":id" element={<ProjectDetails />} />
+                    </Route>
+
+                    {/* Products Module */}
+                    <Route path="projects" element={<ProductDashboard />} />
+
+                    {/* Projects Module */}
+                    <Route path="contact">
+                        <Route index element={<ProjectDashboard />} />
+                        <Route path=":id" element={<ProjectDetails />} />
+                    </Route>
+                </Route>
+
+                {/* Protected Routes (Wrapped in MainLayout) */}
+                <Route
+                    path="/erp"
                     element={
                         <ProtectedRoute>
                             <MainLayout />
