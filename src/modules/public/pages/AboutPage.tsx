@@ -1,0 +1,142 @@
+import React from 'react';
+import { Box, Typography, Container, Grid, Stack } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import heroBg from '../../../assets/hero-bg.jpg';
+
+const AboutPage: React.FC = () => {
+    return (
+        <Box>
+            {/* Page Hero */}
+            <Box sx={{ pt: { xs: 15, md: 20 }, pb: { xs: 8, md: 12 }, bgcolor: '#F9FAFB' }}>
+                <Container maxWidth="lg">
+                    <Typography
+                        variant="overline"
+                        color="secondary"
+                        fontWeight={800}
+                        letterSpacing={2}
+                        sx={{ mb: 2, display: 'block' }}
+                    >
+                        WHO WE ARE
+                    </Typography>
+                    <Typography
+                        variant="h1"
+                        sx={{
+                            fontWeight: 900,
+                            fontSize: { xs: '3rem', md: '5rem' },
+                            mb: 3,
+                            letterSpacing: '-0.02em',
+                        }}
+                    >
+                        About Charitysun
+                    </Typography>
+                    <Typography variant="h5" color="text.secondary" sx={{ maxWidth: 700, lineHeight: 1.6 }}>
+                        Leading the way in precision engineering and innovative solutions for the
+                        modern industrial landscape.
+                    </Typography>
+                </Container>
+            </Box>
+
+            {/* Mission Section */}
+            <Container maxWidth="lg" sx={{ py: { xs: 8, md: 15 } }}>
+                <Grid container spacing={8} alignItems="center">
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <Box
+                            component="img"
+                            src={heroBg}
+                            sx={{
+                                width: '100%',
+                                height: '500px',
+                                objectFit: 'cover',
+                                borderRadius: '2px',
+                            }}
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <Typography variant="h3" fontWeight={800} sx={{ mb: 4 }}>
+                            Driven by Precision, <br />
+                            <Box component="span" sx={{ color: 'secondary.main' }}>
+                                Powered by Innovation.
+                            </Box>
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{ fontSize: '1.1rem', color: 'text.secondary', mb: 4, lineHeight: 1.8 }}
+                        >
+                            Charitysun Engineering is a multi-disciplinary firm dedicated to pushing the
+                            boundaries of what's possible in the industrial landscape. We combine decades
+                            of technical expertise with state-of-the-art digital infrastructure.
+                        </Typography>
+                        <Stack spacing={3}>
+                            <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Box sx={{ color: 'secondary.main', pt: 0.5 }}>
+                                    <ArrowForwardIcon />
+                                </Box>
+                                <Typography variant="body1">
+                                    Global standards in automobile part manufacturing
+                                </Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Box sx={{ color: 'secondary.main', pt: 0.5 }}>
+                                    <ArrowForwardIcon />
+                                </Box>
+                                <Typography variant="body1">
+                                    Advanced mechanical machinery maintenance systems
+                                </Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Box sx={{ color: 'secondary.main', pt: 0.5 }}>
+                                    <ArrowForwardIcon />
+                                </Box>
+                                <Typography variant="body1">
+                                    Next-gen ERP solutions for industrial automation
+                                </Typography>
+                            </Box>
+                        </Stack>
+                    </Grid>
+                </Grid>
+            </Container>
+
+            {/* Stats Section */}
+            <Box sx={{ bgcolor: 'secondary.main', color: 'white', py: { xs: 8, md: 12 } }}>
+                <Container maxWidth="lg">
+                    <Grid container spacing={6} textAlign="center">
+                        <Grid size={{ xs: 12, md: 3 }}>
+                            <Typography variant="h2" fontWeight={900} sx={{ mb: 1 }}>
+                                20+
+                            </Typography>
+                            <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                                Years of Excellence
+                            </Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 3 }}>
+                            <Typography variant="h2" fontWeight={900} sx={{ mb: 1 }}>
+                                500+
+                            </Typography>
+                            <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                                Projects Delivered
+                            </Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 3 }}>
+                            <Typography variant="h2" fontWeight={900} sx={{ mb: 1 }}>
+                                50+
+                            </Typography>
+                            <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                                Expert Engineers
+                            </Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 3 }}>
+                            <Typography variant="h2" fontWeight={900} sx={{ mb: 1 }}>
+                                100%
+                            </Typography>
+                            <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                                Client Satisfaction
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </Box>
+        </Box>
+    );
+};
+
+export default AboutPage;

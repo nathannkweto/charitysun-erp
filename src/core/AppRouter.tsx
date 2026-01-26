@@ -18,6 +18,7 @@ import GeneralLedger from "../modules/accounting/pages/GeneralLedger.tsx";
 import LandingPage from "../modules/public/pages/LandingPage.tsx";
 import PublicLayout from "../shared/layouts/PublicLayout.tsx";
 import ServicesPage from "../modules/public/pages/ServicesPage.tsx";
+import AboutPage from "../modules/public/pages/AboutPage.tsx";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const { isAuthenticated, isLoading } = useAuth();
@@ -63,10 +64,9 @@ export const AppRouter = () => {
                         <Route index element={<ServicesPage />} />
                     </Route>
 
-                    {/* Projects Module */}
+                    {/* About Page */}
                     <Route path="about">
-                        <Route index element={<ProjectDashboard />} />
-                        <Route path=":id" element={<ProjectDetails />} />
+                        <Route index element={<AboutPage />} />
                     </Route>
 
                     {/* Products Module */}
