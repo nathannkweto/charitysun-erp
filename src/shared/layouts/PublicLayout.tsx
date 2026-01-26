@@ -1,12 +1,19 @@
 import { Box, Toolbar } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+
 import { Header } from '../components/PublicHeader';
 import { Footer } from '../components/PublicFooter';
 
 export const PublicLayout = () => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh',
+                overflowX: 'hidden'
+            }}
+        >
             <Header />
 
             <Box
@@ -16,20 +23,28 @@ export const PublicLayout = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     bgcolor: 'background.default',
-                    minHeight: '100vh',
-                    width: '100%'
+                    width: '100%',
+                    position: 'relative'
                 }}
             >
-                {/* Matches MainLayout:
-                   Offsets the fixed AppBar so content doesn't hide behind it
+                {/* Spacer for Fixed AppBar:
+                   MUI's <Toolbar /> automatically adjusts its height
+                   (56px mobile, 64px desktop) to match the fixed Header.
                 */}
                 <Toolbar />
 
-                {/* Matches MainLayout:
-                   Container for the actual page content.
-                   flexGrow ensures Footer is pushed to bottom if content is short.
+                {/* Page Content Wrapper:
+                   flexGrow: 1 ensures this section expands to fill available space,
+                   pushing the Footer to the bottom of the viewport on short pages.
                 */}
-                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Box
+                    sx={{
+                        flexGrow: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '100%'
+                    }}
+                >
                     <Outlet />
                 </Box>
 
