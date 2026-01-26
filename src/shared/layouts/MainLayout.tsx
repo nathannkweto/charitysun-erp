@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Box, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { Topbar } from './components/Topbar';
-import { Sidebar } from './components/Sidebar';
-import { Footer } from './components/Footer';
+import { Topbar } from '../components/Topbar';
+import { Sidebar } from '../components/Sidebar';
+import { Footer } from '../components/Footer';
 
 // Define widths
 const DRAWER_WIDTH = 240;

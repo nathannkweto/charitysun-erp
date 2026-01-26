@@ -11,7 +11,7 @@ import {
     Tooltip
 } from '@mui/material';
 import { Logout, AccountCircle, Menu as MenuIcon } from '@mui/icons-material';
-import { useAuth } from '../../../core/auth/useAuth';
+import { useAuth } from '../../core/auth/useAuth.ts';
 
 interface TopbarProps {
     onDrawerToggle: () => void;
